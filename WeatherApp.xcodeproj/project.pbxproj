@@ -16,6 +16,7 @@
 		1658287C234B38BB001A0702 /* WeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1658287B234B38BB001A0702 /* WeatherAppUITests.swift */; };
 		1658288C234B3BCD001A0702 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1658288B234B3BCD001A0702 /* SecondView.swift */; };
 		1658288E234B3C07001A0702 /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1658288D234B3C07001A0702 /* ThirdView.swift */; };
+		16972A1D234F478B004FC309 /* WeatherStructFiveDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16972A1C234F478B004FC309 /* WeatherStructFiveDay.swift */; };
 		16B2D863234DEEBF00B4AB94 /* WeatherStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2D862234DEEBF00B4AB94 /* WeatherStruct.swift */; };
 		16B2D865234DFFA600B4AB94 /* FiveDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2D864234DFFA600B4AB94 /* FiveDayCell.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		1658287D234B38BB001A0702 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1658288B234B3BCD001A0702 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		1658288D234B3C07001A0702 /* ThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
+		16972A1C234F478B004FC309 /* WeatherStructFiveDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStructFiveDay.swift; sourceTree = "<group>"; };
 		16B2D862234DEEBF00B4AB94 /* WeatherStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStruct.swift; sourceTree = "<group>"; };
 		16B2D864234DFFA600B4AB94 /* FiveDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +117,7 @@
 				1658288D234B3C07001A0702 /* ThirdView.swift */,
 				16B2D862234DEEBF00B4AB94 /* WeatherStruct.swift */,
 				16B2D864234DFFA600B4AB94 /* FiveDayCell.swift */,
+				16972A1C234F478B004FC309 /* WeatherStructFiveDay.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				16B2D865234DFFA600B4AB94 /* FiveDayCell.swift in Sources */,
 				1658285E234B38AF001A0702 /* ViewController.swift in Sources */,
 				16B2D863234DEEBF00B4AB94 /* WeatherStruct.swift in Sources */,
+				16972A1D234F478B004FC309 /* WeatherStructFiveDay.swift in Sources */,
 				1658285C234B38AF001A0702 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
