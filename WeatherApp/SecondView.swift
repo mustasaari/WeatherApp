@@ -12,8 +12,12 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var stuff = ["eka", "toka", "kolmas"]
     var fiveDayWeatherArray: WeatherStructFiveDay?
+    var city = "London"
     
     @IBOutlet weak var forecastTableFiveDays: UITableView!
+    
+    @IBOutlet weak var locationLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +36,14 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         print("Second view did appear")
         stuff[2] = "yayyyy" //muuta dataa tableviewissä
+        
+        city = UserDefaults.standard.string(forKey: "userLastLocation") ?? "London"
+        self.locationLabel.text = "For Location \(city)"
+        city = city.replacingOccurrences(of: " ", with: "+")
         self.forecastTableFiveDays.reloadData() //reload tableview
         
         //five day weather forecast url
-        fetchUrl(url: "https://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&APPID=e5832b1e0a998a414175ccc09695ddc7")
+        fetchUrl(url: "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&units=metric&APPID=e5832b1e0a998a414175ccc09695ddc7")
     }
     
     //UITableViewDataSource
@@ -81,7 +89,6 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
         if let txt = self.fiveDayWeatherArray?.list[indexPath.row].dt_txt {
             cell.dateLabel.text = txt
         }
-        
         
         //cell.label.text = self.fiveDayWeatherArray?.list[indexPath.row].main.temp
         

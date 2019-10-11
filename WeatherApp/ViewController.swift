@@ -35,6 +35,10 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("First view did appear")
+        
+        //check user location from userdefaults
+        city = UserDefaults.standard.string(forKey: "userLastLocation") ?? "London"
+        city = city.replacingOccurrences(of: " ", with: "+")
         let url2 = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&APPID=e5832b1e0a998a414175ccc09695ddc7"
         fetchUrl(url: url2)
         //fetchImage(imgcode: "10d")
