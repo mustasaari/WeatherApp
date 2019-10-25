@@ -88,11 +88,6 @@ class ViewController: UIViewController {
         
         do {
             let todo = try decoder.decode(WeatherStruct.self, from: data!)
-            print(todo.name)
-            print(todo.main.temp)
-            print(todo.weather[0].main)
-            print(todo.weather[0].description)
-            print(todo.weather[0].icon)
             updateUI(loc: todo.name, tmp: todo.main.temp, weather: todo.weather[0].main, desc: todo.weather[0].description)
             self.fetchImage(imgcode: todo.weather[0].icon)
             

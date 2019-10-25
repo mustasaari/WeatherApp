@@ -45,11 +45,9 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = self.fiveDayWeatherArray?.list.count {
-            print("COUNT")
             return count
         }
         else {
-            print("array empty")
             return 0
         }
     }
@@ -70,7 +68,7 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         //get icon for cell
         if let txt = self.fiveDayWeatherArray?.list[indexPath.row].weather[0].icon {
-            cell.getImage(imgCode: txt)
+                cell.getImage(imgCode: txt)
         }
         //add date for cell
         if let txt = self.fiveDayWeatherArray?.list[indexPath.row].dt_txt {

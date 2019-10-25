@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class ThirdView: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
+class ThirdView: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var currentLocationLabel: UILabel!
     @IBOutlet weak var newLocationTextfield: UITextField!
@@ -29,6 +29,7 @@ class ThirdView: UIViewController, UITableViewDataSource, UITableViewDelegate, C
         if UserDefaults.standard.array(forKey: "userLastLocationArray") != nil {
             stuff = UserDefaults.standard.array(forKey: "userLastLocationArray") as! [String]
         }
+        newLocationTextfield.delegate = self
         
     }
     
@@ -67,6 +68,7 @@ class ThirdView: UIViewController, UITableViewDataSource, UITableViewDelegate, C
             self.saveUserLocation(location: stuff[indexPath.row])
         }
         currentlySelectedIndexPath = stuff[indexPath.row]
+        self.newLocationTextfield.endEditing(true)
     }
     
     //prepare to get GPS location
@@ -114,9 +116,13 @@ class ThirdView: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     //When user tries to add new location, location is checked and corrected
     @IBAction func addLocationButton(_ sender: Any) {
         let newLocationName = newLocationTextfield.text
-        
+        addLocations(name: newLocationName!)
+    }
+    
+    //when adding new location to list
+    func addLocations(name: String) {
         let geoC = CLGeocoder()
-        geoC.geocodeAddressString(newLocationName!, completionHandler: { (placemarks, error) in
+        geoC.geocodeAddressString(name, completionHandler: { (placemarks, error) in
             //print(placemarks?.first?.location)
             if let location = placemarks?.first?.locality {
                 print("Corrected location \(location)")
@@ -161,6 +167,13 @@ class ThirdView: UIViewController, UITableViewDataSource, UITableViewDelegate, C
         alert.addAction(okAction)
         
         self.present(alert, animated: true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.newLocationTextfield.endEditing(true)
+        let text = newLocationTextfield.text
+        addLocations(name: text!)
+        return false
     }
     
 }
