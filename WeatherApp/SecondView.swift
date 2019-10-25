@@ -23,19 +23,15 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         print("Second viewDidLoad")
-        //self.forecastTableFiveDays.dataSource = self
-        //self.forecastTableFiveDays.delegate = self
     }
     
     //what happens on cell click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print(stuff[indexPath.row])
-        print("clicked")
+        //print("clicked")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         print("Second view did appear")
-        stuff[2] = "yayyyy" //muuta dataa tableviewissä
         
         city = UserDefaults.standard.string(forKey: "userLastLocation") ?? "London"
         self.locationLabel.text = "For Location \(city)"
@@ -48,7 +44,6 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return self.stuff.count
         if let count = self.fiveDayWeatherArray?.list.count {
             print("COUNT")
             return count
@@ -61,14 +56,9 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //var cell = tableView.dequeueReusableCell(withIdentifier: "fivedaycell")
-        
-        print("Load tableview cell")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "fivedaycell", for: indexPath) as! FiveDayCell
         
-        //cell.label.text = self.stuff[indexPath.row]   //toimiva stuff lisäys labeliin
-        //print(self.fiveDayWeatherArray?.list[indexPath.row].main.temp)
         //add weather main to label
         if let txt = self.fiveDayWeatherArray?.list[indexPath.row].weather[0].main {
             cell.label.text = txt
@@ -80,23 +70,12 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         //get icon for cell
         if let txt = self.fiveDayWeatherArray?.list[indexPath.row].weather[0].icon {
-            //let txt2 = String(format: "%f", txt)
-            //cell.label.text = "\(txt2) C"
-            //cell.fetchImage(imgcode: txt)
             cell.getImage(imgCode: txt)
         }
         //add date for cell
         if let txt = self.fiveDayWeatherArray?.list[indexPath.row].dt_txt {
             cell.dateLabel.text = txt
         }
-        
-        //cell.label.text = self.fiveDayWeatherArray?.list[indexPath.row].main.temp
-        
-        //if (cell == nil) {
-        //    cell = UITableViewCell(style: .default, reuseIdentifier: "fivedaycell")
-        //}
-        //cell!.textLabel!.text = self.stuff[indexPath.row]
-        
         return cell
     }
     
@@ -110,6 +89,7 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
+        
         let resstr = String(data: data!, encoding: String.Encoding.utf8)
         
         print("print fect")
@@ -130,15 +110,8 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
             print(todo.list[0].dt_txt)
             print(todo.list[0].main.temp)   //weather
             self.fiveDayWeatherArray = todo
-            
-            //print(self.fiveDayWeatherArray?.list[0].main.temp)
-            
         } catch {
             print("error yay")  //must make new struct for this fecth 10.10.2019 end note
         }
     }
-    
-    
-    
-    
 }

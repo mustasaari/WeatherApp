@@ -8,6 +8,10 @@
 
 import UIKit
 
+/*
+ * Class for second screen tableview cell
+ */
+
 class FiveDayCell: UITableViewCell {
     
     @IBOutlet weak var label: UILabel!
@@ -19,30 +23,22 @@ class FiveDayCell: UITableViewCell {
     
     var imageCodeForAPI:String = ""
     
-    //override func awakeFromNib() {
-    //    super.awakeFromNib()
-    //}
-    //override func setSelected(_ selected: Bool, animated: Bool) {
-    //    super.setSelected(selected, animated: animated)
-    //}
-    
+    //get weather icon if found in userdefaults use it, if not fetch it
     func getImage(imgCode: String) {
         
         imageCodeForAPI = imgCode
         
         if (UserDefaults.standard.data(forKey: imgCode) != nil) {
             //load from userDefaults
-            print("should load from userdef")
             let img = UserDefaults.standard.data(forKey: imgCode)
             let img2 = UIImage(data: img!)
             self.cellImage.image = img2
         }
         else {
-            print("fetch from internets")
+            //fetch from api
             fetchImage(imgcode: imgCode)
         }
     }
-    
     
     func fetchImage(imgcode: String) {
         let config = URLSessionConfiguration.default
@@ -64,5 +60,4 @@ class FiveDayCell: UITableViewCell {
             self.cellImage.image = img
         })
     }
-    
 }

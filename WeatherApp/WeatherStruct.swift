@@ -8,19 +8,18 @@
 
 import Foundation
 
-struct WeatherStruct: Codable {
+class WeatherStruct: Codable {
     
     var name: String
     var main: Temperature
     var weather: [Descriptions]
-
 }
 
-struct Temperature: Codable {
+class Temperature: Codable {
     var temp: Double
 }
 
-struct Descriptions: Codable {
+class Descriptions: Codable {
     var main: String
     var description: String
     var icon: String

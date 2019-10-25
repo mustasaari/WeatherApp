@@ -19,6 +19,7 @@
 		16972A1D234F478B004FC309 /* WeatherStructFiveDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16972A1C234F478B004FC309 /* WeatherStructFiveDay.swift */; };
 		16B2D863234DEEBF00B4AB94 /* WeatherStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2D862234DEEBF00B4AB94 /* WeatherStruct.swift */; };
 		16B2D865234DFFA600B4AB94 /* FiveDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2D864234DFFA600B4AB94 /* FiveDayCell.swift */; };
+		16E87661235EF95400DE281B /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E87660235EF95400DE281B /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		16972A1C234F478B004FC309 /* WeatherStructFiveDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStructFiveDay.swift; sourceTree = "<group>"; };
 		16B2D862234DEEBF00B4AB94 /* WeatherStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStruct.swift; sourceTree = "<group>"; };
 		16B2D864234DFFA600B4AB94 /* FiveDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayCell.swift; sourceTree = "<group>"; };
+		16E87660235EF95400DE281B /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				16B2D862234DEEBF00B4AB94 /* WeatherStruct.swift */,
 				16B2D864234DFFA600B4AB94 /* FiveDayCell.swift */,
 				16972A1C234F478B004FC309 /* WeatherStructFiveDay.swift */,
+				16E87660235EF95400DE281B /* CacheManager.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				1658288C234B3BCD001A0702 /* SecondView.swift in Sources */,
 				16B2D865234DFFA600B4AB94 /* FiveDayCell.swift in Sources */,
 				1658285E234B38AF001A0702 /* ViewController.swift in Sources */,
+				16E87661235EF95400DE281B /* CacheManager.swift in Sources */,
 				16B2D863234DEEBF00B4AB94 /* WeatherStruct.swift in Sources */,
 				16972A1D234F478B004FC309 /* WeatherStructFiveDay.swift in Sources */,
 				1658285C234B38AF001A0702 /* AppDelegate.swift in Sources */,

@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     var temperature = 15.0
     var weather = "Not found"
     var weatherDescription = "Not Found"
+    var cacheManager = CacheManager()
+    
+    var dataToCache: WeatherStruct?
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -21,11 +24,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     
-    
     let urli = "https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=e5832b1e0a998a414175ccc09695ddc7"
-    
-    //&units=metric
-    //q=London
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +35,34 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("First view did appear")
         
-        //check user location from userdefaults
+        //check user location from userdefaults. If not found use London as default
         city = UserDefaults.standard.string(forKey: "userLastLocation") ?? "London"
-        city = city.replacingOccurrences(of: " ", with: "+")
-        let url2 = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&APPID=e5832b1e0a998a414175ccc09695ddc7"
-        fetchUrl(url: url2)
-        //fetchImage(imgcode: "10d")
+        
+        //check if weather data can be found from memory. If not nil is returned from cachemanager
+        let weatherFromCache = cacheManager.getWeather(city: city)
+        
+        if let info = weatherFromCache {
+            print("WEATHER LOADED FROM CACHE \(info.name)")
+            updateUI(loc: info.name, tmp: info.temperature, weather: info.weatherMain, desc: info.weatherDescription)
+            
+            let img = UIImage(data: info.iconData!)
+            self.weatherImage.image = img
+            //fetchImage(imgcode: info.icon)
+            
+        }
+        else {
+            print("weather not found from cache")
+            //fetch start so spaces to plusses
+            city = city.replacingOccurrences(of: " ", with: "+") //replace spaces with + for url
+            let url2 = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&APPID=e5832b1e0a998a414175ccc09695ddc7"
+            fetchUrl(url: url2)
+            
+        }
     }
 
-
+    //fetch url
     func fetchUrl(url: String) {
+        print("W E A T H E R D A T A  F E T C H  S T A R T E D")
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         let url: URL? = URL(string: url)
@@ -53,6 +70,7 @@ class ViewController: UIViewController {
         task.resume()
     }
     
+    //when fetch is complete
     func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
         let resstr = String(data: data!, encoding: String.Encoding.utf8)
         
@@ -63,45 +81,7 @@ class ViewController: UIViewController {
         
     }
     
-    //eka yritys mutta alla parempi koodi
-    func readJSON(data: Data?) {
-        let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-        if let dictionary = json as? [String: Any] {
-            
-            //iterate keys and values
-            for (key, value) in dictionary {
-                print(key, value)
-            }
-            
-            //print city name "London"
-            if let name = dictionary["name"] as? String {
-                print(name)
-            }
-            
-            //print temperature in london
-            if let main = dictionary["main"] as? [String: Any] {
-                if let temp = main["temp"] as? Double {
-                    print(temp)
-                }
-            }
-            
-            if let weather = dictionary["weather"] as? [Any] {
-                //print(type(of: weather))
-                if let array = weather.first as? [String: Any] {
-                    if let main = array["main"] {
-                        print(main)
-                    }
-                    if let description = array["description"] {
-                        print(description)
-                    }
-                }
-                
-            }
-            
-            
-        }
-    }
-    
+    //read json func
     func readJSON2 (data: Data?) {
         
         let decoder = JSONDecoder()
@@ -115,12 +95,15 @@ class ViewController: UIViewController {
             print(todo.weather[0].icon)
             updateUI(loc: todo.name, tmp: todo.main.temp, weather: todo.weather[0].main, desc: todo.weather[0].description)
             self.fetchImage(imgcode: todo.weather[0].icon)
+            
+            self.dataToCache = todo
+            //cacheManager.saveCity(city: todo)
         } catch {
-            print("error yay")
+            print("error decoding json")
         }
-        
     }
     
+    //update ui components
     func updateUI(loc: String, tmp: Double, weather: String, desc: String) {
         self.locationLabel.text = loc
         self.temperatureLabel.text = String(tmp) + " C"
@@ -128,6 +111,7 @@ class ViewController: UIViewController {
         self.weatherLabel.text = weather
     }
     
+    //func for fetching weather image
     func fetchImage(imgcode: String) {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
@@ -136,14 +120,16 @@ class ViewController: UIViewController {
         task.resume()
     }
     
+    //When image is fetched set it and save weather to cache
     func doneFetchingImage(data: Data?, response: URLResponse?, error: Error?) {
-        //let resstr = String(data: data!, encoding: String.Encoding.utf8)
         
         DispatchQueue.main.async(execute: {() in
-            //NSLog(resstr!)
-            print("iamge fetched")
-            var img = UIImage(data: data!)
+            print("image fetched")
+            let img = UIImage(data: data!)
             self.weatherImage.image = img
+            if let toCache = self.dataToCache {
+                self.cacheManager.saveCity(city: toCache, img: data!)
+            }
         })
     }
 }
