@@ -21,6 +21,17 @@ class FiveDayCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     
     var imageCodeForAPI:String = ""
+    var loadIndicator: UIActivityIndicatorView?
+    
+    func start() {
+        loadIndicator = UIActivityIndicatorView(style: .gray)
+        let container = UIView()
+        container.frame = CGRect(x: cellImage.frame.width/2.5, y: cellImage.frame.height/2.1, width: 30, height: 30)
+        //container.backgroundColor = .red
+        container.addSubview(loadIndicator!)
+        cellImage.addSubview(container)
+        loadIndicator?.startAnimating()
+    }
     
     //get weather icon if found in userdefaults use it, if not fetch it
     func getImage(imgCode: String) {
@@ -36,6 +47,7 @@ class FiveDayCell: UITableViewCell {
                 let img = UIImage(data: data)
                 self.cellImage.image = img
                 print("got image from cache")
+                loadIndicator?.stopAnimating()
             } catch {
                 print("error in loading")
             }
@@ -49,6 +61,8 @@ class FiveDayCell: UITableViewCell {
     func setImage(img: Data) {  //25.10
         let img2 = UIImage(data: img)
         self.cellImage.image = img2
+        self.loadIndicator?.stopAnimating()
+        print("did set image")
     }
     
     func fetchImage(imgcode: String) {
@@ -72,6 +86,8 @@ class FiveDayCell: UITableViewCell {
             self.cellImage.image = img
             
             self.saveImage(data: data!, key: self.imageCodeForAPI)
+            
+            self.loadIndicator?.stopAnimating()
         })
     }
     

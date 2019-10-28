@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var weather = "Not found"
     var weatherDescription = "Not Found"
     var cacheManager = CacheManager()
+    var loadIndicator: UIActivityIndicatorView?
     
     var dataToCache: WeatherStruct?
     
@@ -35,6 +36,15 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("First view did appear")
         
+        //activity indicator show
+        loadIndicator = UIActivityIndicatorView(style: .gray)
+        let container = UIView()
+        container.frame = CGRect(x: weatherImage.frame.width/2, y: weatherImage.frame.height/2, width: 100, height: 100)
+        //container.backgroundColor = .red
+        container.addSubview(loadIndicator!)
+        weatherImage.addSubview(container)
+        loadIndicator?.startAnimating()
+        
         //check user location from userdefaults. If not found use London as default
         city = UserDefaults.standard.string(forKey: "userLastLocation") ?? "London"
         
@@ -48,6 +58,7 @@ class ViewController: UIViewController {
             let img = UIImage(data: info.iconData!)
             self.weatherImage.image = img
             //fetchImage(imgcode: info.icon)
+            loadIndicator?.stopAnimating()
             
         }
         else {
@@ -125,6 +136,7 @@ class ViewController: UIViewController {
             if let toCache = self.dataToCache {
                 self.cacheManager.saveCity(city: toCache, img: data!)
             }
+            self.loadIndicator?.stopAnimating()
         })
     }
 }

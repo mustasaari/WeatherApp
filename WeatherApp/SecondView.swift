@@ -57,6 +57,8 @@ class SecondView: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "fivedaycell", for: indexPath) as! FiveDayCell
         
+        cell.start()
+        
         //add weather main to label
         if let txt = self.fiveDayWeatherArray?.list[indexPath.row].weather[0].main {
             cell.label.text = txt
