@@ -12,8 +12,8 @@ iOS Weather App created with Swift and Xcode
 
 ## Techologies
 Project is created with
-* Swift 5,
-* Xcode 10
+* Swift
+* Xcode
 
 ## Setup
 Launch project in Xcode
