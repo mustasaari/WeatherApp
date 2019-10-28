@@ -12,7 +12,7 @@
         <!--Weather Now-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="screenone" id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,7 +91,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Lm5-71-TXp">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="I32-de-6q0" sceneMemberID="viewController">
+                <tabBarController restorationIdentifier="tabbarrestore" automaticallyAdjustsScrollViewInsets="NO" id="I32-de-6q0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wP1-eF-uk6">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -111,7 +111,7 @@
         <!--Five Day Forecast-->
         <scene sceneID="ch2-0c-zki">
             <objects>
-                <viewController id="1Eb-jp-Fb6" customClass="SecondView" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="screentwo" id="1Eb-jp-Fb6" customClass="SecondView" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r5O-vw-NCb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -200,7 +200,7 @@
         <!--Location-->
         <scene sceneID="07w-IK-Plh">
             <objects>
-                <viewController id="dZT-Xz-Pxx" customClass="ThirdView" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="screenthree" id="dZT-Xz-Pxx" customClass="ThirdView" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OKE-Ns-K9K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
